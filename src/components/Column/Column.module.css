@@ -1,0 +1,20 @@
+.wrapper {
+  background-color: yellow;
+  border-radius: 1em;
+  margin: 0 2em;
+  width: 10em;
+  overflow: hidden;
+}
+
+.title {
+  color: red;
+  text-align: center;
+  margin: 2em 0;
+}
+
+.content {
+  background-color: lightgreen;
+  border-radius: 1em;
+  padding: 1em;
+  text-align: center;
+}

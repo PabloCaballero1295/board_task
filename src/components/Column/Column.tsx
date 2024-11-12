@@ -19,10 +19,10 @@ export const Column = ({ status, tasks, setTasks }: ColumnProps) => {
   }))
 
   const addItemToSection = (item: DragItem) => {
-    if (item.status !== status) {
+    if (item.status !== status.id) {
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
-          task.id === item.id ? { ...task, status } : task
+          task.id === item.id ? { ...task, status: status.id } : task
         )
       )
     }
@@ -41,7 +41,10 @@ export const Column = ({ status, tasks, setTasks }: ColumnProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>{status}</div>
+      <div className={styles.header}>
+        <div className={styles.title}>{status.name}</div>
+        <div className={styles.tasks_counter}>{tasks.length}</div>
+      </div>
       <div
         className={`${styles.content}  ${isOver ? styles.over : ""}`}
         ref={drop}

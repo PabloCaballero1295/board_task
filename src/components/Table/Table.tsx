@@ -13,7 +13,11 @@ export const Table = () => {
     { id: "3", text: "TASK 3", status: "DONE" },
   ])
 
-  const columns: ColumnType[] = ["TODO", "IN_PROGRESS", "DONE"]
+  const columns: ColumnType[] = [
+    { id: "TODO", name: "TODO" },
+    { id: "IN_PROGRESS", name: "EN PROGRESO" },
+    { id: "DONE", name: "HECHO" },
+  ]
 
   return (
     <div className={styles.wrapper}>
@@ -22,9 +26,9 @@ export const Table = () => {
         <DndProvider backend={HTML5Backend}>
           {columns.map((column) => (
             <Column
-              key={column}
+              key={column.id}
               status={column}
-              tasks={tasks.filter((task) => task.status === column)}
+              tasks={tasks.filter((task) => task.status === column.id)}
               setTasks={setTasks}
             />
           ))}

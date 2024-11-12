@@ -1,14 +1,18 @@
 export interface Task {
   id: string
   text: string
-  status: ColumnType
+  status: ColumnId
 }
 
-export type ColumnType = "TODO" | "IN_PROGRESS" | "DONE"
+export type ColumnId = "TODO" | "IN_PROGRESS" | "DONE"
+export interface ColumnType {
+  id: ColumnId
+  name: string
+}
 
 export type DragItem = {
   id: string
   index: number
-  status: ColumnType
+  status: ColumnId
   type: string
 }

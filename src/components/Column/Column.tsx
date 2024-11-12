@@ -79,6 +79,7 @@ export const Column = ({ status, tasks, setTasks }: ColumnProps) => {
             task={task}
             index={index}
             moveTask={moveTask}
+            setTasks={setTasks}
           />
         ))}
       </div>

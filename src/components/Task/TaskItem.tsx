@@ -7,9 +7,10 @@ interface TaskProps {
   task: Task
   index: number
   moveTask: (dragIndex: number, hoverIndex: number) => void
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>
 }
 
-export const TaskItem = ({ task, index, moveTask }: TaskProps) => {
+export const TaskItem = ({ task, index, moveTask, setTasks }: TaskProps) => {
   const ref = useRef<HTMLDivElement>(null)
 
   const [{ isDragging }, drag] = useDrag({
@@ -38,12 +39,29 @@ export const TaskItem = ({ task, index, moveTask }: TaskProps) => {
 
   drag(drop(ref))
 
+  const deleteTask = () => {
+    setTasks((prev) => {
+      const array_copy = [...prev]
+
+      prev.map((t, index) => {
+        if (t.id == task.id) {
+          array_copy.splice(index, 1)
+        }
+      })
+
+      return [...array_copy]
+    })
+  }
+
   return (
     <div
       ref={ref}
       className={`${styles.wrapper} ${isDragging ? styles.dragging : ""}`}
     >
       <div className={styles.name}>{task.text}</div>
+      <button className={styles.delete_button} onClick={deleteTask}>
+        borrar
+      </button>
     </div>
   )
 }

@@ -9,3 +9,7 @@
 .name {
   color: blue;
 }
+
+.dragging {
+  opacity: 25%;
+}

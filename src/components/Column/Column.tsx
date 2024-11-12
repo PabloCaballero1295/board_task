@@ -2,6 +2,8 @@ import { useDrop } from "react-dnd"
 import styles from "./Column.module.css"
 import { ColumnType, DragItem, Task } from "../../types/types"
 import { TaskItem } from "../Task/TaskItem"
+import { v4 as uuidv4 } from "uuid"
+import { ChangeEvent, useState } from "react"
 
 interface ColumnProps {
   status: ColumnType
@@ -10,6 +12,8 @@ interface ColumnProps {
 }
 
 export const Column = ({ status, tasks, setTasks }: ColumnProps) => {
+  const [taskName, setTaskName] = useState("")
+
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "TASK",
     drop: (item: DragItem) => addItemToSection(item),
@@ -39,6 +43,26 @@ export const Column = ({ status, tasks, setTasks }: ColumnProps) => {
     })
   }
 
+  const createNewTask = () => {
+    if (taskName.length == 0) {
+      return
+    }
+
+    if (taskName.trim().length == 0) {
+      return
+    }
+
+    const id = uuidv4()
+    const newTask = { id: id, text: taskName, status: status.id, type: "TASK" }
+
+    setTasks((prevTasks) => [...prevTasks, newTask])
+    setTaskName("")
+  }
+
+  const handleTaskNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTaskName(e.target.value)
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -57,6 +81,18 @@ export const Column = ({ status, tasks, setTasks }: ColumnProps) => {
             moveTask={moveTask}
           />
         ))}
+      </div>
+      <div className={styles.footer}>
+        <input
+          value={taskName}
+          onChange={handleTaskNameChange}
+          className={styles.task_input}
+          type="text"
+          placeholder="Nueva tarea ..."
+        ></input>
+        <button className={styles.add_task_button} onClick={createNewTask}>
+          Añadir
+        </button>
       </div>
     </div>
   )

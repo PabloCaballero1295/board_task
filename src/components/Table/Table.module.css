@@ -1,12 +1,12 @@
 .wrapper {
-  background-color: red;
-  padding-bottom: 4em;
-  padding-top: 4em;
+  background-color: aqua;
+  flex: 1;
 }
 
 .title {
   height: 2em;
   text-align: center;
+  padding-top: 4em;
   margin-bottom: 4em;
 }
 

@@ -3,11 +3,12 @@
   border: 1px solid black;
   border-radius: 1em;
   margin: 0.5em 0;
-  padding: 1em 0;
+  padding: 1em 1em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .name {
-  color: blue;
+  text-align: left;
 }
 
 .dragging {

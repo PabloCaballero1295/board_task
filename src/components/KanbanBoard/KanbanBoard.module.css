@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: red;
+  display: flex;
+  gap: 2em;
+}
+
+.add_column_button {
+  background-color: darkslategrey;
+  border-radius: 1em;
+}
+
+.columns_wrapper {
+  display: flex;
+  gap: 1em;
+}

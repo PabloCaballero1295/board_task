@@ -1,0 +1,50 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: blue;
+  width: 15em;
+  height: 30em;
+  max-height: 30em;
+
+  border-radius: 1em;
+  overflow: hidden;
+}
+
+.wrapper_dragging {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: blue;
+  width: 15em;
+  height: 30em;
+  max-height: 30em;
+
+  border-radius: 1em;
+  overflow: hidden;
+
+  opacity: 0.6;
+  border: 1px solid pink;
+}
+
+.header {
+  color: black;
+  background-color: cyan;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.content {
+  width: 100%;
+  flex: 1;
+}
+
+.delete_column {
+  margin-left: auto;
+}

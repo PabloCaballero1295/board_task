@@ -16,3 +16,8 @@ export type DragItem = {
   status: ColumnId
   type: string
 }
+
+export type Column = {
+  id: number
+  title: string
+}

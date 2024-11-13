@@ -1,4 +1,4 @@
-export interface Task {
+export interface Task_ {
   id: string
   text: string
   status: ColumnId
@@ -20,4 +20,10 @@ export type DragItem = {
 export type Column = {
   id: number
   title: string
+}
+
+export type Task = {
+  id: number
+  columnId: number
+  content: string
 }

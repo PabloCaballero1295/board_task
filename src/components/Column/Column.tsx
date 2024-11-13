@@ -1,14 +1,14 @@
 import { useDrop } from "react-dnd"
 import styles from "./Column.module.css"
-import { ColumnType, DragItem, Task } from "../../types/types"
+import { ColumnType, DragItem, Task_ } from "../../types/types"
 import { TaskItem } from "../Task/TaskItem"
 import { v4 as uuidv4 } from "uuid"
 import { ChangeEvent, useState } from "react"
 
 interface ColumnProps {
   status: ColumnType
-  tasks: Task[]
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>
+  tasks: Task_[]
+  setTasks: React.Dispatch<React.SetStateAction<Task_[]>>
 }
 
 export const Column = ({ status, tasks, setTasks }: ColumnProps) => {

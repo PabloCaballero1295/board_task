@@ -1,13 +1,13 @@
 import { useRef } from "react"
-import { DragItem, Task } from "../../types/types"
+import { DragItem, Task_ } from "../../types/types"
 import styles from "./TaskItem.module.css"
 import { useDrag, useDrop } from "react-dnd"
 
 interface TaskProps {
-  task: Task
+  task: Task_
   index: number
   moveTask: (dragIndex: number, hoverIndex: number) => void
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>
+  setTasks: React.Dispatch<React.SetStateAction<Task_[]>>
 }
 
 export const TaskItem = ({ task, index, moveTask, setTasks }: TaskProps) => {

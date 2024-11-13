@@ -43,8 +43,17 @@
 .content {
   width: 100%;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .delete_column {
   margin-left: auto;
+}
+
+.add_task {
+  background-color: lime;
+  padding: 1em 0;
+  cursor: pointer;
 }

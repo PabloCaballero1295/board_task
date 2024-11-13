@@ -1,0 +1,7 @@
+.wrapper {
+  color: black;
+  background-color: yellow;
+  border-radius: 1em;
+  padding: 0.5em;
+  cursor: grab;
+}

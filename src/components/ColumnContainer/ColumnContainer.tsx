@@ -1,8 +1,8 @@
-import { useSortable } from "@dnd-kit/sortable"
+import { SortableContext, useSortable } from "@dnd-kit/sortable"
 import { Column, Task } from "../../types/types"
 import styles from "./ColumnContainer.module.css"
 import { CSS } from "@dnd-kit/utilities"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { TaskCard } from "../TaskCard/TaskCard"
 
 interface Props {
@@ -27,6 +27,10 @@ export const ColumnContainer = (props: Props) => {
   } = props
 
   const [editMode, setEditMode] = useState(false)
+
+  const tasksIds = useMemo(() => {
+    return tasks.map((task) => task.id)
+  }, [tasks])
 
   const {
     setNodeRef,
@@ -93,14 +97,16 @@ export const ColumnContainer = (props: Props) => {
         </button>
       </div>
       <div className={styles.content}>
-        {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            deleteTask={deleteTask}
-            updateTask={updateTask}
-          />
-        ))}
+        <SortableContext items={tasksIds}>
+          {tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
+            />
+          ))}
+        </SortableContext>
       </div>
       <button
         className={styles.add_task}

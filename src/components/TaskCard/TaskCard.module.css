@@ -1,16 +1,19 @@
 .wrapper {
+  height: 4em;
+  min-height: 4em;
   color: black;
   background-color: yellow;
   border-radius: 1em;
   padding: 0.5em;
   cursor: grab;
   white-space: pre;
+  display: flex;
 }
 
 .task_content {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 5em;
+  height: 100%;
 }
 
 .text_area {
@@ -22,4 +25,17 @@
 ::-webkit-scrollbar-thumb {
   background-color: blue;
   border-radius: 1em;
+}
+
+.wrapper_empty {
+  height: 4em;
+  min-height: 4em;
+  color: black;
+  background-color: yellow;
+  border-radius: 1em;
+  padding: 0.5em;
+  cursor: grab;
+  white-space: pre;
+  display: flex;
+  opacity: 0.5;
 }

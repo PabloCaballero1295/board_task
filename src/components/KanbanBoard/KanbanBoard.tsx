@@ -45,6 +45,9 @@ export const KanbanBoard = () => {
   const deleteColumn = (id: number) => {
     const filteredColumns = columns.filter((col) => col.id != id)
     setColumns(filteredColumns)
+
+    const newTasks = tasks.filter((t) => t.columnId !== id)
+    setTasks(newTasks)
   }
 
   const updateColumn = (id: number, title: string) => {

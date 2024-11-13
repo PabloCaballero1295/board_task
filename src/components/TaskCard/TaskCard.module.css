@@ -4,4 +4,22 @@
   border-radius: 1em;
   padding: 0.5em;
   cursor: grab;
+  white-space: pre;
+}
+
+.task_content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 5em;
+}
+
+.text_area {
+  height: 90%;
+  resize: none;
+  border-radius: 1em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 1em;
 }

@@ -2,18 +2,20 @@
   height: 4em;
   min-height: 4em;
   color: black;
-  background-color: yellow;
-  border-radius: 1em;
+  background-color: white;
+  border-radius: 0.25em;
   padding: 0.5em;
   cursor: grab;
   white-space: pre;
   display: flex;
+  margin: 0.25em 0.5em;
 }
 
 .task_content {
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
+  margin: 0;
 }
 
 .text_area {
@@ -22,8 +24,8 @@
   border-radius: 1em;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: blue;
+.task_content::-webkit-scrollbar-thumb {
+  background-color: rgb(133, 133, 133);
   border-radius: 1em;
 }
 
@@ -31,11 +33,12 @@
   height: 4em;
   min-height: 4em;
   color: black;
-  background-color: yellow;
-  border-radius: 1em;
+  background-color: white;
+  border-radius: 0.25em;
   padding: 0.5em;
   cursor: grab;
   white-space: pre;
   display: flex;
+  margin: 0.25em 0.5em;
   opacity: 0.5;
 }

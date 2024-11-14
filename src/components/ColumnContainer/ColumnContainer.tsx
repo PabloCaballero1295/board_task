@@ -71,7 +71,7 @@ export const ColumnContainer = (props: Props) => {
         onClick={() => setEditMode(true)}
         className={styles.header}
       >
-        <div>0</div>
+        <div className={styles.task_number}>{tasks.length}</div>
         <div className={styles.title}>
           {!editMode && column.title}
           {editMode && (

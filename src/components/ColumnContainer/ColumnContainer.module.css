@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   color: white;
-  background-color: blue;
+  background-color: rgb(220, 220, 220);
   width: 15em;
   height: 30em;
   max-height: 30em;
 
-  border-radius: 1em;
+  border-radius: 0.5em;
   overflow: hidden;
 }
 
@@ -15,12 +15,12 @@
   display: flex;
   flex-direction: column;
   color: white;
-  background-color: blue;
+  background-color: rgb(220, 220, 220);
   width: 15em;
   height: 30em;
   max-height: 30em;
 
-  border-radius: 1em;
+  border-radius: 0.5em;
   overflow: hidden;
 
   opacity: 0.6;
@@ -29,15 +29,18 @@
 
 .header {
   color: black;
-  background-color: cyan;
+  /*background-color: rgb(70, 71, 71);*/
   display: flex;
   align-items: center;
   padding: 1em;
 }
 
 .title {
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content {
@@ -45,8 +48,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1em;
   overflow-y: auto;
+}
+
+.task_number {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 1.5em;
+  aspect-ratio: 1/1;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 0.5em;
 }
 
 .delete_column {
@@ -54,12 +65,13 @@
 }
 
 .add_task {
-  background-color: lime;
+  background-color: rgb(120, 253, 187);
   padding: 1em 0;
   cursor: pointer;
+  border: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: green !important;
+.content::-webkit-scrollbar-thumb {
+  background-color: rgb(133, 133, 133);
   border-radius: 1em;
 }

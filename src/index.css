@@ -1,5 +1,6 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --background: rgb(105, 181, 252);
 }
 
 html {
@@ -23,8 +24,4 @@ body {
 
 ::-webkit-scrollbar:horizontal {
   height: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: pink;
 }

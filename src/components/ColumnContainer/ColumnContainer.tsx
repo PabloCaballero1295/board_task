@@ -4,7 +4,7 @@ import styles from "./ColumnContainer.module.css"
 import { CSS } from "@dnd-kit/utilities"
 import { useMemo, useState } from "react"
 import { TaskCard } from "../TaskCard/TaskCard"
-import { MoreHoriz } from "@mui/icons-material"
+import { ColumnMenu } from "../ColumnMenu/ColumnMenu"
 
 interface Props {
   column: Column
@@ -50,6 +50,14 @@ export const ColumnContainer = (props: Props) => {
     disabled: editMode,
   })
 
+  const updateEditMode = (mode: boolean) => {
+    setEditMode(mode)
+  }
+
+  const updateOnMouseOver = (value: boolean) => {
+    setMouseIsOver(value)
+  }
+
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
@@ -79,9 +87,9 @@ export const ColumnContainer = (props: Props) => {
     >
       <div {...attributes} {...listeners} className={styles.header}>
         <div className={styles.task_number}>{tasks.length}</div>
-        <div className={styles.title} onClick={() => setEditMode(true)}>
-          {!editMode && column.title}
-          {editMode && (
+        <div className={styles.title}>
+          {column.title}
+          {/*{editMode && (
             <input
               value={column.title}
               onChange={(e) => updateColumn(column.id, e.target.value)}
@@ -94,15 +102,17 @@ export const ColumnContainer = (props: Props) => {
                 setEditMode(false)
               }}
             ></input>
-          )}
+          )}*/}
         </div>
         {mouseIsOver && (
-          <MoreHoriz
-            className={styles.delete_column}
-            onClick={() => deleteColumn(column.id)}
-          >
-            del
-          </MoreHoriz>
+          <ColumnMenu
+            id={column.id}
+            title={column.title}
+            updateColumn={updateColumn}
+            deleteColumn={deleteColumn}
+            updateEditMode={updateEditMode}
+            updateOnMouseOver={updateOnMouseOver}
+          />
         )}
       </div>
       <div className={styles.content}>

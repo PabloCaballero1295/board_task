@@ -36,7 +36,7 @@ export const KanbanBoard = () => {
   const createNewColumn = () => {
     const columnToAdd: Column = {
       id: generateId(),
-      title: `Column ${columns.length + 1}`,
+      title: "New column",
     }
 
     setColumns([...columns, columnToAdd])

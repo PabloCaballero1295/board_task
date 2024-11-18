@@ -3,6 +3,7 @@ import { Task } from "../../types/types"
 import styles from "./TaskCard.module.css"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
 
 interface Props {
   task: Task
@@ -93,7 +94,14 @@ export const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
       }}
     >
       <p className={styles.task_content}>{task.content}</p>
-      {mouseIsOver && <button onClick={() => deleteTask(task.id)}>Del</button>}
+      {mouseIsOver && (
+        <MoreHorizIcon
+          className={styles.options_button}
+          onClick={() => deleteTask(task.id)}
+        >
+          Del
+        </MoreHorizIcon>
+      )}
     </div>
   )
 }

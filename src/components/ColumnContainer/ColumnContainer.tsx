@@ -4,6 +4,7 @@ import styles from "./ColumnContainer.module.css"
 import { CSS } from "@dnd-kit/utilities"
 import { useMemo, useState } from "react"
 import { TaskCard } from "../TaskCard/TaskCard"
+import { MoreHoriz } from "@mui/icons-material"
 
 interface Props {
   column: Column
@@ -27,6 +28,7 @@ export const ColumnContainer = (props: Props) => {
   } = props
 
   const [editMode, setEditMode] = useState(false)
+  const [mouseIsOver, setMouseIsOver] = useState(false)
 
   const tasksIds = useMemo(() => {
     return tasks.map((task) => task.id)
@@ -64,15 +66,20 @@ export const ColumnContainer = (props: Props) => {
   }
 
   return (
-    <div ref={setNodeRef} style={style} className={styles.wrapper}>
-      <div
-        {...attributes}
-        {...listeners}
-        onClick={() => setEditMode(true)}
-        className={styles.header}
-      >
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={styles.wrapper}
+      onMouseEnter={() => {
+        setMouseIsOver(true)
+      }}
+      onMouseLeave={() => {
+        setMouseIsOver(false)
+      }}
+    >
+      <div {...attributes} {...listeners} className={styles.header}>
         <div className={styles.task_number}>{tasks.length}</div>
-        <div className={styles.title}>
+        <div className={styles.title} onClick={() => setEditMode(true)}>
           {!editMode && column.title}
           {editMode && (
             <input
@@ -89,12 +96,14 @@ export const ColumnContainer = (props: Props) => {
             ></input>
           )}
         </div>
-        <button
-          className={styles.delete_column}
-          onClick={() => deleteColumn(column.id)}
-        >
-          del
-        </button>
+        {mouseIsOver && (
+          <MoreHoriz
+            className={styles.delete_column}
+            onClick={() => deleteColumn(column.id)}
+          >
+            del
+          </MoreHoriz>
+        )}
       </div>
       <div className={styles.content}>
         <SortableContext items={tasksIds}>

@@ -7,14 +7,17 @@
 
 .add_column_button {
   color: white;
-  width: 15em;
+  width: 18rem;
   border: none;
-  background-color: gray;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.7);
   border-radius: 0.5em;
+  height: 36em;
   cursor: pointer;
 }
 
 .columns_wrapper {
   display: flex;
   gap: 1em;
+  height: 30em;
 }

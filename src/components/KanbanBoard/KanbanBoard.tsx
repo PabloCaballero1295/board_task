@@ -185,12 +185,14 @@ export const KanbanBoard = () => {
                 tasks={tasks.filter((task) => task.columnId === column.id)}
               />
             ))}
+            <button
+              className={styles.add_column_button}
+              onClick={createNewColumn}
+            >
+              Add Column
+            </button>
           </SortableContext>
         </div>
-
-        <button className={styles.add_column_button} onClick={createNewColumn}>
-          Add Column
-        </button>
 
         {createPortal(
           <DragOverlay>

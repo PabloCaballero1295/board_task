@@ -8,20 +8,22 @@ html {
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
   height: 100%;
+  flex: 1;
 }
 
 body {
+  background-color: var(--background);
   margin: 0;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar:horizontal {
-  height: 8px;
+  height: 10px;
 }

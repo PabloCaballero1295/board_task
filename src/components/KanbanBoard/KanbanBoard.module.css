@@ -1,8 +1,10 @@
 .wrapper {
   padding: 4em 1em;
-  background-color: var(--background);
   display: flex;
   gap: 2em;
+  overflow-x: scroll;
+  width: auto;
+  height: auto;
 }
 
 .add_column_button {
@@ -20,4 +22,9 @@
   display: flex;
   gap: 1em;
   height: 30em;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: rgb(133, 133, 133);
+  border-radius: 1em;
 }

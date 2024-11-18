@@ -3,7 +3,7 @@ import { Task } from "../../types/types"
 import styles from "./TaskCard.module.css"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
+import { TaskMenu } from "../TaskMenu/TaskMenu"
 
 interface Props {
   task: Task
@@ -36,11 +36,6 @@ export const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
     transform: CSS.Transform.toString(transform),
   }
 
-  const toggleEditMode = () => {
-    setEditMode((prev) => !prev)
-    setMouseIsOver(false)
-  }
-
   if (isDragging) {
     return (
       <div
@@ -51,31 +46,12 @@ export const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
     )
   }
 
-  if (editMode) {
-    return (
-      <div
-        ref={setNodeRef}
-        style={style}
-        {...attributes}
-        {...listeners}
-        onClick={toggleEditMode}
-        className={styles.wrapper}
-      >
-        <textarea
-          className={styles.text_area}
-          value={task.content}
-          autoFocus
-          placeholder="Task content here"
-          onBlur={toggleEditMode}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && e.shiftKey) toggleEditMode()
-          }}
-          onChange={(e) => {
-            updateTask(task.id, e.target.value)
-          }}
-        ></textarea>
-      </div>
-    )
+  const updateEditMode = (mode: boolean) => {
+    setEditMode(mode)
+  }
+
+  const updateOnMouseOver = (value: boolean) => {
+    setMouseIsOver(value)
   }
 
   return (
@@ -84,7 +60,6 @@ export const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
       style={style}
       {...attributes}
       {...listeners}
-      onClick={toggleEditMode}
       className={styles.wrapper}
       onMouseEnter={() => {
         setMouseIsOver(true)
@@ -95,12 +70,14 @@ export const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
     >
       <p className={styles.task_content}>{task.content}</p>
       {mouseIsOver && (
-        <MoreHorizIcon
-          className={styles.options_button}
-          onClick={() => deleteTask(task.id)}
-        >
-          Del
-        </MoreHorizIcon>
+        <TaskMenu
+          id={task.id}
+          content={task.content}
+          updateTask={updateTask}
+          deleteTask={deleteTask}
+          updateEditMode={updateEditMode}
+          updateOnMouseOver={updateOnMouseOver}
+        />
       )}
     </div>
   )

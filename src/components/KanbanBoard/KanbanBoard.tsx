@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import styles from "./KanbanBoard.module.css"
-import { Column, Task } from "../../types/types"
+import { Board, Column, Task } from "../../types/types"
 import { ColumnContainer } from "../ColumnContainer/ColumnContainer"
 import {
   DndContext,
@@ -16,14 +16,50 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable"
 import { createPortal } from "react-dom"
 import { TaskCard } from "../TaskCard/TaskCard"
 
+import { v4 as uuidv4 } from "uuid"
+import { BoardMenu } from "../BoardMenu/BoardMenu"
+
 export const KanbanBoard = () => {
-  const [columns, setColumns] = useState<Column[]>([])
+  const boardKey = "board_todo"
+
+  let boardLocalStorageData = JSON.parse(
+    localStorage.getItem(boardKey)!
+  ) as Board
+
+  if (boardLocalStorageData == null) {
+    const initialBoard = {
+      id: uuidv4(),
+      name: "My table",
+      columns: [],
+      tasks: [],
+    }
+
+    boardLocalStorageData = initialBoard
+  }
+  const saveStateOnLocalStorage = (data: Board) => {
+    localStorage.setItem(boardKey, JSON.stringify(data))
+  }
+
+  const [title, setTitle] = useState(boardLocalStorageData.name)
+
+  const [columns, setColumns] = useState<Column[]>(
+    boardLocalStorageData.columns
+  )
   const columnsId = useMemo(() => columns.map((col) => col.id), [columns])
 
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>(boardLocalStorageData.tasks)
 
   const [activeColumn, setActiveColumn] = useState<Column | null>(null)
   const [activeTask, setActiveTask] = useState<Task | null>(null)
+
+  useEffect(() => {
+    saveStateOnLocalStorage({
+      id: boardLocalStorageData.id,
+      name: title,
+      columns: columns,
+      tasks: tasks,
+    })
+  }, [columns, tasks, title, boardLocalStorageData])
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -159,67 +195,86 @@ export const KanbanBoard = () => {
     }
   }
 
+  const updateBoardName = (newBoardName: string) => {
+    setTitle(newBoardName)
+  }
+
+  const resetBoard = () => {
+    setTitle("My table")
+    setColumns([])
+    setTasks([])
+  }
+
   const generateId = () => {
     return Math.floor(Math.random() * 10001)
   }
 
   return (
     <div className={styles.wrapper}>
-      <DndContext
-        onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
-        sensors={sensors}
-        onDragOver={onDragOver}
-      >
-        <div className={styles.columns_wrapper}>
-          <SortableContext items={columnsId}>
-            {columns.map((column) => (
-              <ColumnContainer
-                key={column.id}
-                column={column}
-                deleteColumn={deleteColumn}
-                updateColumn={updateColumn}
-                createTask={createTask}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-                tasks={tasks.filter((task) => task.columnId === column.id)}
-              />
-            ))}
-            <button
-              className={styles.add_column_button}
-              onClick={createNewColumn}
-            >
-              Add Column
-            </button>
-          </SortableContext>
-        </div>
+      <BoardMenu
+        name={title}
+        updateBoardName={updateBoardName}
+        resetBoard={resetBoard}
+      />
+      <div className={styles.title}>{title}</div>
 
-        {createPortal(
-          <DragOverlay>
-            {activeColumn && (
-              <ColumnContainer
-                column={activeColumn}
-                deleteColumn={deleteColumn}
-                updateColumn={updateColumn}
-                createTask={createNewColumn}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-                tasks={tasks.filter(
-                  (task) => task.columnId === activeColumn.id
-                )}
-              />
-            )}
-            {activeTask && (
-              <TaskCard
-                task={activeTask}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-              />
-            )}
-          </DragOverlay>,
-          document.body
-        )}
-      </DndContext>
+      <div className={styles.board_wrapper}>
+        <DndContext
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+          sensors={sensors}
+          onDragOver={onDragOver}
+        >
+          <div className={styles.columns_wrapper}>
+            <SortableContext items={columnsId}>
+              {columns.map((column) => (
+                <ColumnContainer
+                  key={column.id}
+                  column={column}
+                  deleteColumn={deleteColumn}
+                  updateColumn={updateColumn}
+                  createTask={createTask}
+                  deleteTask={deleteTask}
+                  updateTask={updateTask}
+                  tasks={tasks.filter((task) => task.columnId === column.id)}
+                />
+              ))}
+              <button
+                className={styles.add_column_button}
+                onClick={createNewColumn}
+              >
+                Add Column
+              </button>
+            </SortableContext>
+          </div>
+
+          {createPortal(
+            <DragOverlay>
+              {activeColumn && (
+                <ColumnContainer
+                  column={activeColumn}
+                  deleteColumn={deleteColumn}
+                  updateColumn={updateColumn}
+                  createTask={createNewColumn}
+                  deleteTask={deleteTask}
+                  updateTask={updateTask}
+                  tasks={tasks.filter(
+                    (task) => task.columnId === activeColumn.id
+                  )}
+                />
+              )}
+              {activeTask && (
+                <TaskCard
+                  task={activeTask}
+                  deleteTask={deleteTask}
+                  updateTask={updateTask}
+                />
+              )}
+            </DragOverlay>,
+            document.body
+          )}
+        </DndContext>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,14 @@
+.menu_button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}

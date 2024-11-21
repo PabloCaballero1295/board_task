@@ -1,10 +1,22 @@
 .wrapper {
-  padding: 4em 1em;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.board_wrapper {
+  flex: 1;
   display: flex;
   gap: 2em;
   overflow-x: scroll;
   width: auto;
   height: auto;
+}
+
+.title {
+  font-size: 2em;
+  margin: auto;
+  width: fit-content;
 }
 
 .add_column_button {
@@ -14,14 +26,16 @@
   background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.7);
   border-radius: 0.5em;
-  height: 36em;
+
   cursor: pointer;
 }
 
 .columns_wrapper {
   display: flex;
   gap: 1em;
-  height: 30em;
+  margin-top: 3em;
+  margin-bottom: 2em;
+  padding: 0 2em;
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
